@@ -74,7 +74,7 @@ const ContTypAgreeAddAssoc = ({
     console.log(JSON.stringify(savedAssociations));
     onAssociationChange(savedAssociations);
 
-   },[]);
+   },[savedAssociations]);
 
   // const deleteAssociation = () => {
   //   if (selectedAssociation) {
