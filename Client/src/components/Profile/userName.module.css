@@ -1,0 +1,10 @@
+.userName{
+    text-align: center;
+      padding: 5px 5px 5px 5px;
+      border-radius: 2px;
+      font-size: 15px;
+      text-transform: uppercase;
+      box-shadow: rgb(17 17 26 / 35%) 0px 1px 0px;
+      color: forestgreen!important;
+      font-weight: 700;
+  }

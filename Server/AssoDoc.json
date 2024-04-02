@@ -1,0 +1,112 @@
+{
+  "step0Data": {
+    "ContractTypeName": "Arun",
+    "Description": "agcjh",
+    "Constraint": "option2",
+    "AllowDocumentAssembly": true,
+    "AllowDocumentUpload": true,
+    "EnableApprovalWorkflow": false,
+    "ShowFileDropZone": false,
+    "TwoColumnAttributeLayout": false,
+    "EnableBulkProcessing": false
+  },
+  "step1Data": {
+    "AvailAttr": [
+      "AnnaPoorni",
+      "Selvamatha",
+      "Murali",
+      "ChinnaAlagu",
+      "Gowtham",
+      "Jeyalakshmi",
+      "MuthuSankari",
+      "John",
+      "Arun",
+      "Example",
+      "Rohit",
+      "Sumesh ",
+      "vignesh",
+      "Virat",
+      "Stephen",
+      "sachin",
+      "siva",
+      "marsh",
+      "mohan",
+      "Abu",
+      "prabha",
+      "Rani",
+      "raja",
+      "agent",
+      "agent",
+      "Das",
+      "Miniu"
+    ],
+    "SelAttr": ["Jawahar", "Ranjith", "Dharama"],
+    "AttrForm": {
+      "Jawahar": {
+        "DisplayName": "jawahar",
+        "DataType": "qwertyuiop",
+        "HelpMessage": "Clear",
+        "DefaultValue": "qsds",
+        "IsGlobal": "Contract Type",
+        "HtmlPrompt": "ABC",
+        "IsDefault": "Yes",
+        "IsEditable": "No",
+        "IsMandatory": "No",
+        "TrackingAttribute": "No",
+        "IsUnique": "No",
+        "DefinedByRule": "No",
+        "IsInherit": "No",
+        "IsSearchable": "No",
+        "IsConditional": "No",
+        "IsLookup": "No"
+      }
+    }
+  },
+  "step2Data": {
+    "AvailAttr": [
+      "Selvamatha",
+      "Murali",
+      "ChinnaAlagu",
+      "Gowtham",
+      "Jeyalakshmi",
+      "MuthuSankari",
+      "John",
+      "Arun",
+      "Example",
+      "Rohit",
+      "Sumesh ",
+      "vignesh",
+      "Virat",
+      "Stephen",
+      "sachin",
+      "siva",
+      "marsh",
+      "mohan",
+      "Abu",
+      "prabha",
+      "Rani",
+      "raja",
+      "agent",
+      "agent",
+      "Das",
+      "Miniu"
+    ],
+    "SelAttr": ["Jawahar", "Ranjith", "Dharama", "AnnaPoorni"]
+  },
+  "step3Data": {
+    "UserDtl": [
+      {
+        "name": "jawahar",
+        "role": "integrate",
+        "email": "jnehru902@gmail.com"
+      },
+      { "name": "Dharama", "role": "option2", "email": "hashni2312@gmail.com" },
+      {
+        "name": "Selvamatha",
+        "role": "option2",
+        "email": "jawaharlal.nehru@savictech.com"
+      }
+    ]
+  },
+  "step4Data": []
+}

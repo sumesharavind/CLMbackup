@@ -1,0 +1,96 @@
+/****************************************Detail CSS *****************************************************/
+/* AssocDocDtl file ToggleButton css code */
+.detailAlign{
+    justify-content: center;
+    
+}
+.detailFormAlign{
+    padding: 25px;
+    box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+    background: #f8f8ff3d;
+}
+/**************************************************Detail CSS END*****************************************/
+
+
+/*********************************************Team CSS ***********************************************/
+/**Padding overall Form and Table Adjustement **/
+.padFormTable{
+    padding: 20px 10px 20px 10px;
+}
+/**Padding overall Form and Table ROW Inside Adjustement **/
+.padInsideAdjustement{
+box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+    padding: 25px 10px 25px 10px;
+    background: #f8f8ff3d;
+    margin: 0px!important;
+}
+.TableHeading th{
+    background: #6431a7!important;
+    color: aliceblue!important;
+    text-align: center!important;
+}
+.DeleteColumnAlign{
+    width: 0!important;
+}
+.DeleteIconPlaced{
+    cursor: pointer!important;
+    text-align: center!important;
+   
+}
+.DeleteIcon{
+    font-size: 20px!important;
+    color: red!important;
+}
+.downArrowparent{
+    position: relative;
+}
+.downArrowparent > .downArrowchild{
+    position: absolute;
+    right: 0;
+}
+.searchList{
+    height: 200px;
+    overflow-y: scroll;
+}
+.searchValues{
+    padding: 5px 0px 10px 5px;
+    margin-right: 5px;
+    cursor: pointer;
+    position: relative;
+    transition: all 300ms ease-in; 
+    -webkit-transition: all 300ms ease-in;
+    -ms-transition: all 300ms ease-in;
+    -o-transition: all 300ms ease-in;
+    -moz-transition: all 300ms ease-in;
+}
+
+.searchValues:hover{
+padding-left: 10px;
+border-radius: 5px 0px 0px 5px;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+    background: #f0f8ff;
+}
+.searchValues:hover::before {left: -10px;}
+.listsearchParent{
+    position: relative;
+}
+.listsearchParent > .listsearchchild{
+    position: absolute;
+    top: 70px;
+    width: 100%;
+    background-color: white;
+    box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+}
+
+/**Verify css**/
+/* AssocDocVerify form alignment code */
+.verifyalign {
+    justify-content: center;
+  }
+  
+  .verifyFormAlign {
+    padding: 30px;
+    box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+    background: #f8f8ff3d;
+  }
+  

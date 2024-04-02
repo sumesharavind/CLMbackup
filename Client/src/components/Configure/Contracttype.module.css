@@ -1,0 +1,29 @@
+.Contractfont{
+    background-color: white;
+   
+    box-shadow: rgba(0, 0, 0, 0.0) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+}
+.Selectcontractfont{
+font-size: 15px;
+    font-weight: 400;
+}
+
+/*Cursor Pointer Purpose*/
+.cursorPointer{
+cursor: pointer;
+}
+
+/*Hover purpose -- for Contract Items */
+.contractItems{
+   
+    background-color: white;
+    transition-duration: 0.4s;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.9) 0px 20px 40px -45px, rgba(8, 37, 64, 0.9) 2px 1px 4px 0px inset;
+    border-radius: 5px;
+}
+.contractItems:hover{
+    transform: translateY(-10px);
+    background-color: #40206b;
+  border: 3px ridge white;
+  color: white;
+}

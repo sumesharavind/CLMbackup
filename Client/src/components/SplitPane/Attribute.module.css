@@ -1,0 +1,55 @@
+.abc{
+    color: goldenrod;
+    font-size: xx-large;
+
+}
+.SlipaneBg{
+    background-color: white;
+  padding: 15px 15px 30px 25px;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+}
+
+.AttributeFont{
+    font-size: 18px;
+}
+
+
+
+  .onoff{
+    margin-left: 5px;
+    font-weight: 500;
+    font-size: 17px;
+}
+/* SAVE clear add -Hover process*/
+/* ButtonAnimations.css */
+
+.ButtonZoom {
+  transition: transform 0.5s!important;
+  -webkit-transition: -webkit-transform 0.5s!important;
+  -moz-transition: -moz-transform 0.5s!important;
+  -ms-transition: -ms-transform 0.5s!important;
+  -o-transition: -o-transform 0.5s!important;
+}
+
+.ButtonZoom:hover {
+  -webkit-transform: scale(1.04)!important;
+  -moz-transform: scale(1.04)!important;
+  -ms-transform: scale(1.04)!important;
+  -o-transform: scale(1.04)!important;
+  transform: scale(1.04)!important;
+}
+/**Switch Animate ----- Created By Jawahar **/
+.switchAnimate{
+  transition: transform 0.5s!important;
+  -webkit-transition: -webkit-transform 0.5s!important;
+  -moz-transition: -moz-transform 0.5s!important;
+  -ms-transition: -ms-transform 0.5s!important;
+  -o-transition: -o-transform 0.5s!important;
+}
+.switchAnimate:hover {
+  -webkit-transform: scale(1.08)!important;
+  -moz-transform: scale(1.08)!important;
+  -ms-transform: scale(1.08)!important;
+  -o-transform: scale(1.08)!important;
+  transform: scale(1.08)!important;
+}

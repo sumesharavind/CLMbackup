@@ -1,0 +1,184 @@
+.Multisteptab {
+    padding: 5px 10px 5px 10px ;
+   
+  }
+  /*  Number of Multistep */
+  .Tabstep {
+  
+    font-size: 20px;
+    margin-top: 12px;
+  }
+  /* Multistep content */
+  .Tabname {
+     
+      font-size: 16px;
+      
+      
+    
+  }
+  
+  
+  .MultiBg{
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+    padding: 30px;
+    background: white;
+    margin-top: 20px;
+    
+  }
+  /**Moving Button** for Next & Prevoius Button created Jawahar*/
+  .movingButton {
+    background: indigo!important;
+    width: 100px!important;
+    height: 35px!important;
+    overflow: hidden!important;
+    text-align: center!important;
+    transition: .2s!important;
+    cursor: pointer!important;
+    border-radius: 5px!important;
+    box-shadow: 0px 1px 2px rgba(0,0,0,.2)!important;
+  
+  }
+  .movingButton:hover{
+    -webkit-transform: scale(1.08)!important;
+  -moz-transform: scale(1.08)!important;
+  -ms-transform: scale(1.08)!important;
+  -o-transform: scale(1.08)!important;
+  transform: scale(1.08)!important;
+  }
+  /*For Next , prev Button while Hover -- created By jawahar*/
+  .btnNextBg {
+    position : relative!important;
+    width : 160px!important;
+    height : 100px!important;
+    margin-top: -98px!important;
+    background : gold!important;
+    left : -250px!important;
+    transition : .3s!important;
+  }
+  .btnNext {
+    color : white!important;
+    transition : .3s!important;
+    margin-top: 5px!important;
+  }
+  .btnNextArrow {
+    margin-top : 65px!important;
+    margin-right : -130px!important;
+    color : indigo!important;
+  }
+  .movingButton:hover .btnNextBg{ /*When hovering over*/
+    left: -130px!important;
+  }
+  .movingButton:hover .btnNext{ /*When hovering over */
+    margin-left : 30px!important;
+  }
+  
+  
+  
+  .movingButton:active { /*Clicked and held*/
+    box-shadow: 0px 5px 6px rgba(0,0,0,0.3)!important;
+  }
+  
+  .AssodocMultistep {/*Multistep Form Header Design */
+  position: relative;
+    
+  width: 45px; /* Adjust the size as needed */
+  height: 56px; /* Adjust the size as needed */
+  background-color: rgb(27 66 40 / 23%);
+  margin-top: -10px; /* Adjust the margin as needed */
+  clip-path: polygon(50% 25%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);  
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  color: #5f0000;
+  
+   }
+   
+   .FlexContainer {/*Multistep Form Col Design */
+    
+      display: -webkit-box;
+      flex-direction: column;
+      align-items: center;
+  
+   }
+
+
+   /**Ranjith edit** for Button**/
+   .CreateButton{
+    background: indigo!important;
+    width: 150px!important;
+    height: 35px!important;
+    overflow: hidden!important;
+    text-align: center!important;
+    transition: .2s!important;
+    cursor: pointer!important;
+    border-radius: 5px!important;
+    box-shadow: 0px 1px 2px rgba(0,0,0,.2)!important;
+ 
+   }
+   .CreateButton:hover{
+    -webkit-transform: scale(1.08)!important;
+  -moz-transform: scale(1.08)!important;
+  -ms-transform: scale(1.08)!important;
+  -o-transform: scale(1.08)!important;
+  transform: scale(1.08)!important;
+  }
+  .PublishButton {
+   
+    background: indigo!important;
+    width: 150px!important;
+    height: 35px!important;
+    overflow: hidden!important;
+    text-align: center!important;
+    transition: .2s!important;
+    cursor: pointer!important;
+    border-radius: 5px!important;
+    box-shadow: 0px 1px 2px rgba(0,0,0,.2)!important;
+  }
+  .PublishButton:hover{
+    -webkit-transform: scale(1.08)!important;
+  -moz-transform: scale(1.08)!important;
+  -ms-transform: scale(1.08)!important;
+  -o-transform: scale(1.08)!important;
+  transform: scale(1.08)!important;
+  }
+  .ApprovalButton {
+   
+    background: indigo!important;
+    width: 300px!important;
+    height: 35px!important;
+    overflow: hidden!important;
+    text-align: center!important;
+    transition: .2s!important;
+    cursor: pointer!important;
+    border-radius: 5px!important;
+    box-shadow: 0px 1px 2px rgba(0,0,0,.2)!important;
+  }
+  .ApprovalButton:hover{
+    -webkit-transform: scale(1.08)!important;
+  -moz-transform: scale(1.08)!important;
+  -ms-transform: scale(1.08)!important;
+  -o-transform: scale(1.08)!important;
+  transform: scale(1.08)!important;
+  }
+  .DiscardButton {
+   
+    background: indigo!important;
+    width: 150px!important;
+    height: 35px!important;
+    overflow: hidden!important;
+    text-align: center!important;
+    transition: .2s!important;
+    cursor: pointer!important;
+    border-radius: 5px!important;
+    box-shadow: 0px 1px 2px rgba(0,0,0,.2)!important;
+  }
+  .DiscardButton:hover{
+    -webkit-transform: scale(1.08)!important;
+  -moz-transform: scale(1.08)!important;
+  -ms-transform: scale(1.08)!important;
+  -o-transform: scale(1.08)!important;
+  transform: scale(1.08)!important;
+  }
+ 
+  
