@@ -6,17 +6,22 @@ import AggreementDtl from "../ConTypAgr/AggreementDtl.js";
 import Breadcrumb from "../Breadcrumb/Breadcrumb.js";
 import { FaArrowRight, FaArrowLeft } from "react-icons/fa";
 import axios from "axios";
+import AgreementVerify from "../ConTypAgr/AgreementVerify.js";
 
 import { createValidationSchema } from "../ValidationSchema.js"; //******** */
 import * as yup from "yup"; //****   */
 import AgreeTeam from "../ConTypAgr/AgreeTeam.js";
 import ContTypAgreeAddAssoc from "../ConTypAgr/ContTypAgreeAddAssoc.js";
 import AgreeAttr from "../ConTypAgr/AgreeAttr.js";
+import { useGlobalContext } from "../GlobalContext.js";
+
 const ContAgreeMultistep = () => {
   const [currentStep, setCurrentStep] = useState(0);
   //***********/
   const [isValidated, setIsValidated] = useState(false);
   const [associatedDocuments, setAssociatedDocuments] = useState([]);
+  const { state } = useGlobalContext();
+  const [agreementVerify, setAgreementVerify] = useState({});
 
   //******************/
   const childFormRef = useRef(null);
@@ -106,9 +111,9 @@ const ContAgreeMultistep = () => {
   };
 
   const handleNext = () => {
-    /*if (currentStep < 5) {
+    /*  if (currentStep < 5) {
       setCurrentStep(currentStep + 1);
-    }*/
+    } */
     try {
       childFormRef.current.handleFormSubmit();
     } catch (errors) {
@@ -119,16 +124,49 @@ const ContAgreeMultistep = () => {
         if (isValidated) {
           setCurrentStep(currentStep + 1);
         }
-        if (currentStep === 2) {
-          // Pass the form data and the associated documents list to the child component
-          setAssociatedDocuments(formData.step2Data);
-        }
+      } else if (currentStep === 3) {
+        let verifyJSON = {};
+        let unames = [];
+        setAgreementVerify({
+          ...agreementVerify,
+          ContractTypeName: formData.step0Data.ContractTypeName,
+        });
+        verifyJSON.ContractTypeName = formData.step0Data.ContractTypeName;
+        verifyJSON.Description = formData.step0Data.Description;
+        verifyJSON.Category = formData.step0Data.Category;
+        verifyJSON.AllowThirdPartyPaper = formData.step0Data.AllowThirdPartyPaper;
+        verifyJSON.AllowClauseAssembly = formData.step0Data.AllowClauseAssembly;
+        verifyJSON.QRCode = formData.step0Data.QRCode;
+        verifyJSON.AllowCopywithAssociation = formData.step0Data.AllowCopywithAssociation;
+        verifyJSON.TwoColumnAttributeLayout = formData.step0Data.TwoColumnAttributeLayout;
+        verifyJSON.EnableCollaboration = formData.step0Data.EnableCollaboration;
+        verifyJSON.EnableAutoSupersede = formData.step0Data.EnableAutoSupersede;
+        verifyJSON.ExpandDropDownonMouseHover = formData.step0Data.ExpandDropDownonMouseHover;
+        verifyJSON.SelectedAttributes = formData.step1Data.SelAttr;
+
+        formData.step4Data.UserDtl.forEach((user) => {
+          unames.push(
+            user.name +
+            " [ Role = " +
+            user.role +
+            " ; Email = " +
+            user.email +
+            " ]  "
+          );
+        });
+        verifyJSON.TeamMembers = unames;
+        setAgreementVerify({ ...agreementVerify, ...verifyJSON });
+  
+        console.log("verifyJSON = " + JSON.stringify(verifyJSON));
+        console.log("Updated verifyJSON:" + JSON.stringify(agreementVerify));
+        setCurrentStep(currentStep + 1);
       } else {
         setCurrentStep(currentStep + 1);
       }
       setIsValidated(false);
     }
   };
+  
 
   const handlePrevious = () => {
     setIsValidated(false); //**** */
@@ -145,7 +183,9 @@ const ContAgreeMultistep = () => {
       let response2 = null;
       let response3 = null;
       let response4 = null;
-
+      let response5 = null;
+      let response6 = null;
+      let resUID = null;
       // Step 0
       response0 = await axios.post(
         "http://localhost:5000/AggrDtlTbl/create",
@@ -242,6 +282,89 @@ const ContAgreeMultistep = () => {
           );
         }
         console.log(response4.status);
+        if (response4.status === 201) {
+          formData.step4Data.UserDtl.forEach(async (userDetail) => {
+            let objJSONData = {};
+            resUID = await axios.get(
+              `http://localhost:5000/Users/read/${userDetail.email}`
+            );
+            console.log(
+              "User Details = " + JSON.stringify(resUID.data.data.id)
+            );
+            objJSONData["EntityID"] = contractTypeCode;
+            objJSONData["EntityName"] = "Associated Document";
+            objJSONData["EntityCreatedBy"] = state.userName;
+            objJSONData["CreatedOn"] = "";
+            objJSONData["EntityStatus"] = "Pending";
+            objJSONData.Data = JSON.stringify({
+              ContractTypeName: formData.step0Data.ContractTypeName,
+              Description: formData.step0Data.Description,
+              Category: formData.step0Data.Category,
+              AllowThirdPartyPaper: formData.step0Data.AllowThirdPartyPaper,
+              AllowClauseAssembly: formData.step0Data.AllowClauseAssembly,
+              QRCode: formData.step0Data.QRCode,
+              AllowCopywithAssociation:
+                formData.step0Data.AllowCopywithAssociation,
+              TwoColumnAttributeLayout:
+                formData.step0Data.TwoColumnAttributeLayout,
+              EnableCollaboration: formData.step0Data.EnableCollaboration,
+              EnableAutoSupersede: formData.step0Data.EnableAutoSupersede,
+              ExpandDropDownonMouseHover:
+                formData.step0Data.ExpandDropDownonMouseHover,
+                
+              TeamMembers: formData.step4Data.UserDtl,
+            });
+            objJSONData["NotificationId"] = null;
+            objJSONData["EntityType"] = "AssociationDocument";
+            objJSONData["UserId"] = resUID.data.data.id; //state.userID;
+            console.log("Notification = " + JSON.stringify(objJSONData));
+            response5 = await axios.post(
+              "http://localhost:5000/Notifications/create",
+              objJSONData
+            );
+            console.log("server Notify = " + JSON.stringify(response5.data));
+            let notificationId = response5.data.data.NotificationId;
+            console.log("Notificatin ID = " + notificationId);
+            console.log("server notify status :" + response5.status);
+            if (response5.status === 201) {
+              let emailJSONData = {};
+              emailJSONData["EmailId"] = null;
+              emailJSONData["NotificationId"] = notificationId;
+              /*  resUID = await axios.get(`http://localhost:5000/Users/read/${userDetail.email}`);
+                  console.log("User Details = " + JSON.stringify(resUID.data.data.id)); */
+              emailJSONData["UserId_email"] = JSON.stringify(
+                resUID.data.data.id
+              ); //state.userID;
+              emailJSONData["SenderName"] = state.userName;
+              emailJSONData["SenderEmail"] = state.userEmail;
+              emailJSONData["RecipientName"] = userDetail.name;
+              emailJSONData["RecipientEmail"] = userDetail.email;
+              emailJSONData["Subject"] =
+                "Reg: Apporval for Agreement Document";
+              emailJSONData[
+                "Message"
+              ] = `Please Kindly Approve the Agreement Document Namely ${objJSONData["EntityName"]}`;
+              emailJSONData["Is_Read"] = "NO";
+              emailJSONData["Send_At"] = null;
+              emailJSONData["Read_At"] = null;
+
+              console.log(
+                "Email Notification = " + JSON.stringify(emailJSONData)
+              );
+              response6 = await axios.post(
+                "http://localhost:5000/Notifyemail/create",
+                emailJSONData
+              );
+              console.log(
+                "EmailNotification Server = " + JSON.stringify(response6.data)
+              );
+              alert("Created and Send for Approval");
+              console.log(
+                "EmailNotification Server status :" + response6.status
+              );
+            }
+          });
+        }
       }
     } catch (error) {
       console.error("Error Saving data:", error);
@@ -303,7 +426,7 @@ const ContAgreeMultistep = () => {
           />
         );
       case 5:
-        return <h6>Verify</h6>;
+        return <AgreementVerify data={agreementVerify} />;
       default:
         return null;
     }
@@ -323,85 +446,88 @@ const ContAgreeMultistep = () => {
       </Container>
       <Container fluid className={AgreeMultiCSS.MultiBg}>
         <Row className=" p-1">
-          <Col xs={6} md={4} lg={2}>
+          <Col xs={6} md={4} lg={2} className={AgreeMultiCSS.FlexContainer}>
             <div
-              className={` ${AgreeMultiCSS.ContAgreeMultisteptab} ${
-                currentStep === 0
-                  ? "bg-success border border-dark text-white rounded "
-                  : "bg-white border border-dark text-dark rounded"
+              className={` ${AgreeMultiCSS.AgreeMultistep} ${
+                currentStep === 0 ? "bg-success text-white" : " "
               }`}
             >
-              <h6 className={AgreeMultiCSS.Tabname}>Details</h6>
+              <h6 className={AgreeMultiCSS.Tabstep}>1</h6>
             </div>
+            <h5 className={`ms-2 mt-2 fw-semibold ${AgreeMultiCSS.Tabname}`}>
+              Details
+            </h5>
           </Col>
-          <Col xs={6} md={4} lg={2}>
+          <Col xs={6} md={4} lg={2} className={AgreeMultiCSS.FlexContainer}>
             <div
-              className={` ${AgreeMultiCSS.ContAgreeMultisteptab} ${
-                currentStep === 1
-                  ? "bg-success border border-dark text-white rounded "
-                  : "bg-white border border-dark text-dark rounded"
+              className={` ${AgreeMultiCSS.AgreeMultistep} ${
+                currentStep === 1 ? "bg-success text-white" : " "
               }`}
             >
-              <h6 className={AgreeMultiCSS.Tabname}>Attributes</h6>
+              <h6 className={AgreeMultiCSS.Tabstep}>2</h6>
             </div>
+            <h5 className={`ms-2 mt-2 fw-semibold ${AgreeMultiCSS.Tabname}`}>
+              Attributes
+            </h5>
           </Col>
-          <Col xs={6} md={4} lg={2}>
+
+          <Col xs={6} md={4} lg={2} className={AgreeMultiCSS.FlexContainer}>
             <div
-              className={`mt-md-0 mt-4 p-1 ${
-                AgreeMultiCSS.ContAgreeMultisteptab
-              } ${
-                currentStep === 2
-                  ? "bg-success border border-dark text-white rounded "
-                  : "bg-white border border-dark text-dark rounded"
+              className={` ${AgreeMultiCSS.AgreeMultistep} ${
+                currentStep === 2 ? "bg-success text-white" : " "
               }`}
             >
-              <h6 className={AgreeMultiCSS.Tabname}>Association</h6>
+              <h6 className={AgreeMultiCSS.Tabstep}>3</h6>
             </div>
+            <h5 className={`ms-2 mt-2 fw-semibold ${AgreeMultiCSS.Tabname}`}>
+              Association
+            </h5>
           </Col>
-          <Col xs={6} md={4} lg={2}>
+
+          <Col xs={6} md={4} lg={2} className={AgreeMultiCSS.FlexContainer}>
             <div
-              className={`mt-lg-0 mt-4 p-1 ${
-                AgreeMultiCSS.ContAgreeMultisteptab
-              } ${
-                currentStep === 3
-                  ? "bg-success border border-dark text-white rounded "
-                  : "bg-white border border-dark text-dark rounded"
+              className={` ${AgreeMultiCSS.AgreeMultistep} ${
+                currentStep === 3 ? "bg-success text-white" : " "
               }`}
             >
-              <h6 className={AgreeMultiCSS.Tabname}>Display Preference</h6>
+              <h6 className={AgreeMultiCSS.Tabstep}>4</h6>
             </div>
+            <h5 className={`ms-2 mt-2 fw-semibold ${AgreeMultiCSS.Tabname}`}>
+              Display Preference
+            </h5>
           </Col>
-          <Col xs={6} md={4} lg={2}>
+          <Col xs={6} md={4} lg={2} className={AgreeMultiCSS.FlexContainer}>
             <div
-              className={`mt-lg-0 mt-4 p-1 ${
-                AgreeMultiCSS.ContAgreeMultisteptab
-              } ${
-                currentStep === 4
-                  ? "bg-success border border-dark text-white rounded "
-                  : "bg-white border border-dark text-dark rounded"
+              className={` ${AgreeMultiCSS.AgreeMultistep} ${
+                currentStep === 4 ? "bg-success text-white" : " "
               } `}
             >
-              <h6 className={AgreeMultiCSS.Tabname}>Team</h6>
+              <h6 className={AgreeMultiCSS.Tabstep}>5</h6>
             </div>
+            <h5 className={`ms-2 mt-2 fw-semibold ${AgreeMultiCSS.Tabname}`}>
+              Team
+            </h5>
           </Col>
-          <Col xs={6} md={4} lg={2}>
+          <Col xs={6} md={4} lg={2} className={AgreeMultiCSS.FlexContainer}>
             <div
-              className={`mt-lg-0 mt-4 p-1 ${
-                AgreeMultiCSS.ContAgreeMultisteptab
-              } ${
-                currentStep === 5
-                  ? "bg-success border border-dark text-white rounded "
-                  : "bg-white border border-dark text-dark rounded"
+              className={` ${AgreeMultiCSS.AgreeMultistep} ${
+                currentStep === 5 ? "bg-success text-white" : " "
               }`}
             >
-              <h6 className={AgreeMultiCSS.Tabname}>Verify</h6>
+              <h6 className={AgreeMultiCSS.Tabstep}>6</h6>
             </div>
+            <h5 className={`ms-2 mt-2 fw-semibold ${AgreeMultiCSS.Tabname}`}>
+              Verify
+            </h5>
           </Col>
           {getColumnContent()}
         </Row>
-        <Row className="p-5">
-          <Col lg={3}></Col>
-          <Col xs={4} md={4} lg={2}>
+        <Row className="p-3 p-md-5">
+          <Col
+            xs={12}
+            lg={2}
+            className="mb-3 d-flex justify-content-center justify-content-lg-start"
+          >
             {currentStep > 0 && (
               <div
                 className={AgreeMultiCSS.movingButton}
@@ -414,7 +540,8 @@ const ContAgreeMultistep = () => {
               </div>
             )}
           </Col>
-          <Col xs={4} md={4} lg={2}>
+
+          <Col xs={12} lg={2} className="mb-3 d-flex justify-content-center">
             {currentStep < 5 && (
               <div className={AgreeMultiCSS.movingButton} onClick={handleNext}>
                 <p className={AgreeMultiCSS.btnNext}>Next</p>
@@ -424,17 +551,43 @@ const ContAgreeMultistep = () => {
               </div>
             )}
           </Col>
-          <Col xs={4} md={4} lg={2}>
+
+          <Col xs={12} lg={1} className="mb-3 d-flex justify-content-center">
             {currentStep === 5 && (
-              <Button
-                onClick={handleSubmit}
-                className="bg-dark border border-dark text-white  p-2 m-1"
-              >
-                Submit
-              </Button>
+              <div className={AgreeMultiCSS.CreateButton}>
+                <p className={AgreeMultiCSS.btnNext}>Create</p>
+              </div>
             )}
           </Col>
-          <Col lg={3}></Col>
+
+          <Col xs={12} lg={2} className="mb-3 d-flex justify-content-center">
+            {currentStep === 5 && (
+              <div className={`${AgreeMultiCSS.PublishButton}`}>
+                <p className={AgreeMultiCSS.btnNext}>Create and Publish</p>
+              </div>
+            )}
+          </Col>
+
+          <Col xs={12} lg={3} className="mb-3 d-flex justify-content-center">
+            {currentStep === 5 && (
+              <div
+                className={AgreeMultiCSS.ApprovalButton}
+                onClick={handleSubmit}
+              >
+                <p className={AgreeMultiCSS.btnNext}>
+                  Create and send For Approval
+                </p>
+              </div>
+            )}
+          </Col>
+
+          <Col xs={12} lg={2} className="mb-3 d-flex justify-content-center ">
+            {currentStep === 5 && (
+              <div className={AgreeMultiCSS.DiscardButton}>
+                <p className={AgreeMultiCSS.btnNext}>Discard</p>
+              </div>
+            )}
+          </Col>
         </Row>
       </Container>
     </>

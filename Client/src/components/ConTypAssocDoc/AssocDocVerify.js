@@ -1,7 +1,7 @@
 import React from "react";
 import { Form } from "react-bootstrap";
 import AssocDocCSS from "./ConTypAssocDoc.module.css";
-import { Container, Row, Col } from "react-bootstrap";
+import {  Row, Col } from "react-bootstrap";
 
 const AssocDocVerify = ({ data }) => {
   /*  alert("Test = " + JSON.stringify(data));
