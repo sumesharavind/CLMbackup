@@ -134,29 +134,34 @@ const ContAgreeMultistep = () => {
         verifyJSON.ContractTypeName = formData.step0Data.ContractTypeName;
         verifyJSON.Description = formData.step0Data.Description;
         verifyJSON.Category = formData.step0Data.Category;
-        verifyJSON.AllowThirdPartyPaper = formData.step0Data.AllowThirdPartyPaper;
+        verifyJSON.AllowThirdPartyPaper =
+          formData.step0Data.AllowThirdPartyPaper;
         verifyJSON.AllowClauseAssembly = formData.step0Data.AllowClauseAssembly;
         verifyJSON.QRCode = formData.step0Data.QRCode;
-        verifyJSON.AllowCopywithAssociation = formData.step0Data.AllowCopywithAssociation;
-        verifyJSON.TwoColumnAttributeLayout = formData.step0Data.TwoColumnAttributeLayout;
+        verifyJSON.AllowCopywithAssociation =
+          formData.step0Data.AllowCopywithAssociation;
+        verifyJSON.TwoColumnAttributeLayout =
+          formData.step0Data.TwoColumnAttributeLayout;
         verifyJSON.EnableCollaboration = formData.step0Data.EnableCollaboration;
         verifyJSON.EnableAutoSupersede = formData.step0Data.EnableAutoSupersede;
-        verifyJSON.ExpandDropDownonMouseHover = formData.step0Data.ExpandDropDownonMouseHover;
+        verifyJSON.ExpandDropDownonMouseHover =
+          formData.step0Data.ExpandDropDownonMouseHover;
         verifyJSON.SelectedAttributes = formData.step1Data.SelAttr;
+        // verifyJSON.setAssociatedDocuments = formData.step2Data;
 
         formData.step4Data.UserDtl.forEach((user) => {
           unames.push(
             user.name +
-            " [ Role = " +
-            user.role +
-            " ; Email = " +
-            user.email +
-            " ]  "
+              " [ Role = " +
+              user.role +
+              " ; Email = " +
+              user.email +
+              " ]  "
           );
         });
         verifyJSON.TeamMembers = unames;
         setAgreementVerify({ ...agreementVerify, ...verifyJSON });
-  
+
         console.log("verifyJSON = " + JSON.stringify(verifyJSON));
         console.log("Updated verifyJSON:" + JSON.stringify(agreementVerify));
         setCurrentStep(currentStep + 1);
@@ -166,7 +171,6 @@ const ContAgreeMultistep = () => {
       setIsValidated(false);
     }
   };
-  
 
   const handlePrevious = () => {
     setIsValidated(false); //**** */
@@ -292,7 +296,7 @@ const ContAgreeMultistep = () => {
               "User Details = " + JSON.stringify(resUID.data.data.id)
             );
             objJSONData["EntityID"] = contractTypeCode;
-            objJSONData["EntityName"] = "Associated Document";
+            objJSONData["EntityName"] = "Agreement Document";
             objJSONData["EntityCreatedBy"] = state.userName;
             objJSONData["CreatedOn"] = "";
             objJSONData["EntityStatus"] = "Pending";
@@ -311,11 +315,11 @@ const ContAgreeMultistep = () => {
               EnableAutoSupersede: formData.step0Data.EnableAutoSupersede,
               ExpandDropDownonMouseHover:
                 formData.step0Data.ExpandDropDownonMouseHover,
-                
+
               TeamMembers: formData.step4Data.UserDtl,
             });
             objJSONData["NotificationId"] = null;
-            objJSONData["EntityType"] = "AssociationDocument";
+            objJSONData["EntityType"] = "AgreementDocument";
             objJSONData["UserId"] = resUID.data.data.id; //state.userID;
             console.log("Notification = " + JSON.stringify(objJSONData));
             response5 = await axios.post(
@@ -339,8 +343,7 @@ const ContAgreeMultistep = () => {
               emailJSONData["SenderEmail"] = state.userEmail;
               emailJSONData["RecipientName"] = userDetail.name;
               emailJSONData["RecipientEmail"] = userDetail.email;
-              emailJSONData["Subject"] =
-                "Reg: Apporval for Agreement Document";
+              emailJSONData["Subject"] = "Reg: Apporval for Agreement Document";
               emailJSONData[
                 "Message"
               ] = `Please Kindly Approve the Agreement Document Namely ${objJSONData["EntityName"]}`;

@@ -26,7 +26,7 @@ AssocDocDtl_api.get("/read/:ContractTypeCode", async (req, res) => {
   try {
     const contractTypeCode = req.params.ContractTypeCode;
     const assocdocdtl = await Assocdocdtl.findOne({
-      where: { ContractTypeName: contractTypeCode },
+      where: { ContractTypeName: contractTypeCode }, ///changes
     });
  
     if (assocdocdtl) {

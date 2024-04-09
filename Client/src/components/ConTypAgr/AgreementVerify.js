@@ -2,7 +2,7 @@ import React from "react";
 import { Form } from "react-bootstrap";
 import AgreeCSS from "./ConTypAgree.module.css";
 import { Container, Row, Col } from "react-bootstrap";
- 
+
 const AgreementVerify = ({ data }) => {
   /*  alert("Test = " + JSON.stringify(data));
   console.log(JSON.stringify(data)); */
@@ -23,7 +23,7 @@ const AgreementVerify = ({ data }) => {
               />
             </Col>
           </Form.Group>
- 
+
           <Form.Group as={Row} controlId="formDescription">
             <Form.Label column lg={4} sm={2}>
               Description
@@ -36,21 +36,21 @@ const AgreementVerify = ({ data }) => {
               />
             </Col>
           </Form.Group>
- 
+
           {/* Add more Form.Group for other fields in a similar manner */}
- 
+
           <Form.Group as={Row} controlId="formCategory">
             <Form.Label column lg={4} sm={2}>
-            Category
+              Category
             </Form.Label>
             <Col lg={8} sm={10}>
               <Form.Control plaintext readOnly defaultValue={data.Category} />
             </Col>
           </Form.Group>
- 
+
           <Form.Group as={Row} controlId="formAllowThirdPartyPaper">
             <Form.Label column lg={4} sm={2}>
-            AllowThirdPartyPaper
+              AllowThirdPartyPaper
             </Form.Label>
             <Col lg={8} sm={10}>
               <Form.Control
@@ -60,33 +60,44 @@ const AgreementVerify = ({ data }) => {
               />
             </Col>
           </Form.Group>
+          <Form.Group as={Row} controlId="formAllowClauseAssembly">
+            <Form.Label column lg={4} sm={2}>
+            AllowClauseAssembly
+            </Form.Label>
+            <Col lg={8} sm={10}>
+              <Form.Control
+                plaintext
+                readOnly
+                defaultValue={data.AllowClauseAssembly}
+              />
+            </Col>
+          </Form.Group>
           <Form.Group as={Row} controlId="formQRCode">
             <Form.Label column lg={4} sm={2}>
-            QRCode            </Form.Label>
+              QRCode{" "}
+            </Form.Label>
             <Col lg={8} sm={10}>
-              <Form.Control
-                plaintext
-                readOnly
-                defaultValue={data.QRCode}
-              />
+              <Form.Control plaintext readOnly defaultValue={data.QRCode} />
             </Col>
           </Form.Group>
- 
-          <Form.Group as={Row} controlId="formAllowCopywithAssociations">
+
+          <Form.Group as={Row} controlId="formAllowCopywithAssociation">
             <Form.Label column lg={4} sm={2}>
-            AllowCopywithAssociations            </Form.Label>
+            AllowCopywithAssociation{" "}
+            </Form.Label>
             <Col lg={8} sm={10}>
               <Form.Control
                 plaintext
                 readOnly
-                defaultValue={data.AllowCopywithAssociations}
+                defaultValue={data.AllowCopywithAssociation}
               />
             </Col>
           </Form.Group>
- 
+
           <Form.Group as={Row} controlId="formTwoColumnAttributeLayout">
             <Form.Label column lg={4} sm={2}>
-            TwoColumnAttributeLayout            </Form.Label>
+              TwoColumnAttributeLayout{" "}
+            </Form.Label>
             <Col lg={8} sm={10}>
               <Form.Control
                 plaintext
@@ -95,22 +106,24 @@ const AgreementVerify = ({ data }) => {
               />
             </Col>
           </Form.Group>
- 
-          <Form.Group as={Row} controlId="formEnableCollabration">
+
+          <Form.Group as={Row} controlId="formEnableCollaboration">
             <Form.Label column lg={4} sm={2}>
-            EnableCollabration            </Form.Label>
+            EnableCollaboration{" "}
+            </Form.Label>
             <Col lg={8} sm={10}>
               <Form.Control
                 plaintext
                 readOnly
-                defaultValue={data.EnableCollabration}
+                defaultValue={data.EnableCollaboration}
               />
             </Col>
           </Form.Group>
- 
+
           <Form.Group as={Row} controlId="formEnableAutoSupersede">
             <Form.Label column lg={4} sm={2}>
-            EnableAutoSupersede            </Form.Label>
+              EnableAutoSupersede{" "}
+            </Form.Label>
             <Col lg={8} sm={10}>
               <Form.Control
                 plaintext
@@ -119,19 +132,20 @@ const AgreementVerify = ({ data }) => {
               />
             </Col>
           </Form.Group>
- 
-          <Form.Group as={Row} controlId="formExpandDropdownonMouseHover">
+
+          <Form.Group as={Row} controlId="formExpandDropDownonMouseHover">
             <Form.Label column lg={4} sm={2}>
-            ExpandDropdownonMouseHover            </Form.Label>
+            ExpandDropDownonMouseHover{" "}
+            </Form.Label>
             <Col lg={8} sm={10}>
               <Form.Control
                 plaintext
                 readOnly
-                defaultValue={data.ExpandDropdownonMouseHover}
+                defaultValue={data.ExpandDropDownonMouseHover}
               />
             </Col>
           </Form.Group>
- 
+
           <Form.Group as={Row} controlId="formSelectedAddAssociations">
             <Form.Label column lg={4} sm={2}>
               Selected AddAssociations
@@ -140,11 +154,15 @@ const AgreementVerify = ({ data }) => {
               <Form.Control
                 plaintext
                 readOnly
-                defaultValue={data.SelectedAddAssociations ? data.SelectedAddAssociations.join(", ") : ""}
-                />
+                defaultValue={
+                  data.SelectedAddAssociations
+                    ? data.SelectedAddAssociations.join(", ")
+                    : ""
+                }
+              />
             </Col>
           </Form.Group>
- 
+
           <Form.Group as={Row} controlId="formSelectedAttributes">
             <Form.Label column lg={4} sm={2}>
               Selected Attributes
@@ -153,11 +171,15 @@ const AgreementVerify = ({ data }) => {
               <Form.Control
                 plaintext
                 readOnly
-                defaultValue={data.SelectedAttributes ? data.SelectedAttributes.join(", ") : ""}
-                />
+                defaultValue={
+                  data.SelectedAttributes
+                    ? data.SelectedAttributes.join(", ")
+                    : ""
+                }
+              />
             </Col>
           </Form.Group>
- 
+
           <Form.Group as={Row} controlId="formTeamMembers">
             <Form.Label column lg={4} sm={2}>
               Team Members
@@ -167,7 +189,9 @@ const AgreementVerify = ({ data }) => {
                 as="textarea"
                 plaintext
                 readOnly
-                defaultValue={data.TeamMembers ? data.TeamMembers.join("\n") : ""}
+                defaultValue={
+                  data.TeamMembers ? data.TeamMembers.join("\n") : ""
+                }
                 style={{
                   whiteSpace: "pre-line",
                   width: "80%",
@@ -182,6 +206,5 @@ const AgreementVerify = ({ data }) => {
     </Row>
   );
 };
- 
+
 export default AgreementVerify;
- 
